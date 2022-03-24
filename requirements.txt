@@ -1,0 +1,5 @@
+numpy
+xarray
+setuptools
+pyparsing
+netCDF4
