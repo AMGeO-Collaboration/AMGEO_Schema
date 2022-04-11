@@ -1,0 +1,6 @@
+about: "AMGeO helps combine diverse high-latitude geospace observations. The purpose of AMGeO is to make the latest geospace data science tool accessible to scientists and students."
+author:
+    name: "AMGeO"
+    email: "amgeo@colorado.edu"
+    logo : "https://amgeo.colorado.edu/static/img/amgeosmall.svg"
+citation: "AMGeO Collaboration. (2019). A Collaborative Data Science Platform for the Geospace Community: Assimilative Mapping of Geospace Observations (AMGeO) v1.0.0. Zenodo. https://doi.org/10.5281/zenodo.3564914"

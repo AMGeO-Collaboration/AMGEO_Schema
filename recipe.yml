@@ -1,0 +1,13 @@
+version: 1
+schemas:
+  Dataset:
+      required:
+          - name
+          - description
+          - spatialCoverage
+          - temporalCoverage
+          - citation
+          - variableMeasured: PropertyValue
+          - url
+      recommended:
+          - version
