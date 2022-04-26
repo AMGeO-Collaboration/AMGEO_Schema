@@ -29,7 +29,7 @@ def autoSchemaGenerator(rootName,folder,urlBase):
        
         doc = ET.SubElement(root, "url")
         
-        ET.SubElement(doc, "loc").text = urlBase+"/static/data/"+file[:file.index('.nc')]+".html"
+        ET.SubElement(doc, "loc").text = urlBase+"/static/data/data-"+file[:file.index('.nc')]+".html"
         ET.SubElement(doc, "lastmod").text = today
         
 
