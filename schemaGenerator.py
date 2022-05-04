@@ -20,7 +20,7 @@ def autoSchemaGenerator(rootName,folder,urlBase):
     for file in files:
         currdata = xarray.open_dataset(folder+"/"+file)
         schema = SchemaBuilder(data=currdata)
-        schema.add_url( urlBase+"/static/data/"+file[:file.index('.nc')]+".html"
+        schema.add_url( urlBase+"/static/data/data-"+file[:file.index('.nc')]+".html"
                        ,urlBase+"/static/data/"+file)
         html = schema.to_html(template="google/visual-dataset.html")
         filew = open(folder+"/data-"+file[:file.index('.nc')]+".html","w")
