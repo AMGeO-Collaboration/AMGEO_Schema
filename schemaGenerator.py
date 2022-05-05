@@ -24,6 +24,7 @@ def autoSchemaGenerator(rootName,folder,urlBase):
                        ,urlBase+"/static/data/"+file)
         html = schema.to_html(template="google/visual-dataset.html")
         filew = open(folder+"/data-"+file[:file.index('.nc')]+".html","w")
+        html = html.replace('"@context": "https://www.schema.org"','"@context": "https://schema.org/"')
         filew.write(html)
         filew.close()
        
@@ -35,5 +36,5 @@ def autoSchemaGenerator(rootName,folder,urlBase):
 
 
     tree = ET.ElementTree(root)
-    ET.indent(tree, space="\t", level=0)
+    #ET.indent(tree, space="\t", level=0)
     tree.write( rootName+"/sitemap.xml",encoding = "UTF-8", xml_declaration = True)
