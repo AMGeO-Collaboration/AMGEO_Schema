@@ -15,7 +15,7 @@ class SchemaBuilder:
         author = default_properties['author']
         del default_properties['author']
         
-        authorSchema = Schema("Organization");
+        authorSchema = Schema("Organization")
 
         for authorprop in author:
             authorSchema.add_property(authorprop,author[authorprop])
@@ -29,29 +29,28 @@ class SchemaBuilder:
             self.add_property("temporalCoverage",dataTime)
             
             
-            dumSpatialMin = Schema("Place")
-            dumSpatialMax = Schema("Place")
+            
             minLat = min(data.coords['lat'].values)
             minLon = min(data.coords['lon'].values)
             
             maxLat = max(data.coords['lat'].values)
             maxLon = max(data.coords['lon'].values)
             
-            dumSpatialMin.add_property("latitude",minLat)
-            dumSpatialMin.add_property("longitude",minLon)
-
-            dumSpatialMax.add_property("latitude",maxLat)
-            dumSpatialMax.add_property("longitude",maxLon)
+            
+            dumPlace = Schema("Place")
+            dumGeo = Schema("GeoShape")
+            dumGeo.add_property("box",f"{minLat} {minLon} {maxLat} {maxLon}")
+            dumPlace.add_property("geo",dumGeo)
 
             self.add_property("name",data.attrs['description']+ " for " + dataTime)
             self.add_property("version",data.attrs['version'])
-            self.add_property("description",data.attrs['description'])
-            self.add_property("spatialCoverage",[dumSpatialMin,dumSpatialMax])
+            self.add_property("about",data.attrs['description'])
+            self.add_property("spatialCoverage",dumPlace)
             variable_list =  list(data.keys())
             
             variable_Schema = []
             for variable in variable_list:
-                dumS = Schema("PropertyValue");
+                dumS = Schema("PropertyValue")
                 dumS.add_property("name",data.data_vars.get(variable).attrs['longname'])
                 dumS.add_property("unitText",data.data_vars.get(variable).attrs['units'])
                 variable_Schema.append(dumS)
@@ -65,7 +64,7 @@ class SchemaBuilder:
         self.schema.add_property("url",siteurl)
         distribution = Schema("DataDownload")
         distribution.add_property("contentUrl",dataurl)
-        distribution.add_property("encodingFormat","application/x-netcdf")
+        distribution.add_property("encodingFormat","application/x-hdf5")
         self.add_property("distribution",distribution)
        
     def add_property_set(self,property_set):
